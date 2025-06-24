@@ -1,0 +1,54 @@
+#Python
+__pycache__
+
+#Output
+*.log
+sim_output_*
+comparison_*
+unit_test_output
+
+#For those who develop with VS Code
+.vscode
+**/.env*
+**/*.env
+launch.json
+
+# Cursor rules
+.cursor*
+
+# For pyenv
+.python-version
+
+# For stupid mac files :)
+.DS_Store
+
+# Mypy/ruff/pytest/datadog
+.*cache
+pyproject.toml
+static-analysis.datadog.yml
+.dmypy.json
+
+#pytest-cov
+.coverage*
+coverage.xml
+pytest.ini
+
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Ignore certificates
+*.pem
+
+# To allow for exta code not ready for commit 
+.Snippets*
+
+# Exclude secrets for deployment
+_deploy/secrets
+
+# Add to ignore for testing purposes
+**dev-local-compose*.yml
+_deploy/run-dev-local
+pr_tests.sh
+_deploy/ec2/compose.override.yml

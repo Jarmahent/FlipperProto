@@ -1,0 +1,38 @@
+from fastapi import FastAPI
+from api.vehicles import router as vehicles_router
+import uvicorn
+
+
+class API_TAGS:
+    VEHICLES = "Vehicles"
+    PARTS = "Parts"
+    LISTINGS = "Listings"
+
+metadata_tag_info = [
+    {
+        "Test": "Test",
+    }
+]
+
+
+def init_app():
+    app = FastAPI(
+        title="RTA API",
+        version="0.0.1",
+        openapi_tags=metadata_tag_info,
+        # lifespan=lifespan,
+        # openapi_url="/rta/openapi.json",
+        # docs_url="/rta/swagger",
+        # redoc_url="/rta/redoc",
+        swagger_ui_parameters={"syntaxHighlight": {"theme": "obsidian"}},
+    )
+
+
+    app.include_router(vehicles_router)
+
+    return app
+
+
+
+if __name__ == "__main__":
+    uvicorn.run("main:init_app", host="0.0.0.0", port=8080, factory=True)

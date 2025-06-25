@@ -14,7 +14,7 @@ Built using FastAPI and SQLAlchemy with a modular design to support expansion in
 - Dashboard for part status, profit, and sales insights
 
 ## 🛠 Tech Stack
-- Python 3.11 (via `pyenv`)
+- Python 3.12 (via `pyenv`)
 - FastAPI + SQLAlchemy 2.0
 - SQLite (dev) / MariaDB (prod-ready)
 - Pydantic v2
@@ -25,8 +25,8 @@ Built using FastAPI and SQLAlchemy with a modular design to support expansion in
 
 ### 1. Install Python with `pyenv`
 ```bash
-pyenv install 3.11.9
-pyenv local 3.11.9
+pyenv install 3.12
+pyenv local 3.12
 ```
 
 ### 2. Create and activate virtual environment

@@ -37,18 +37,19 @@ CREATE TABLE IF NOT EXISTS Part (
   listings
 --------------------------------------------------------------------*/
 CREATE TABLE IF NOT EXISTS Listing (
-    id           INTEGER PRIMARY KEY,
-    part_id      INTEGER NOT NULL,
-    platform     TEXT    NOT NULL CHECK (platform IN ('ebay', 'facebook', 'shopify', 'local')),
-    external_id  TEXT,
-    url          TEXT,
-    price_c      NUMERIC(10, 2) NOT NULL,
-    fees_c       NUMERIC(10, 2) NOT NULL DEFAULT 0,
-    status       TEXT    NOT NULL CHECK (status IN ('draft', 'live', 'sold', 'ended')),
-    listed_dt    TEXT    NOT NULL,
-    sold_date    TEXT,
-    FOREIGN KEY (part_id) REFERENCES parts(id) ON DELETE CASCADE
+  id           INTEGER PRIMARY KEY AUTOINCREMENT,
+  part_id      INTEGER NOT NULL,
+  platform     TEXT    NOT NULL CHECK (platform IN ('EBAY', 'FACEBOOK', 'SHOPIFY', 'LOCAL')),
+  external_id  TEXT,
+  url          TEXT,
+  price_c      NUMERIC(10, 2) NOT NULL,
+  fees_c       NUMERIC(10, 2) NOT NULL DEFAULT 0,
+  status       TEXT    NOT NULL CHECK (status IN ('draft', 'live', 'sold', 'ended')),
+  listed_dt    TEXT    NOT NULL,
+  sold_date    TEXT,
+  FOREIGN KEY (part_id) REFERENCES parts(id) ON DELETE CASCADE
 );
+
 
 /*--------------------------------------------------------------------
   Indexes for performance

@@ -1,6 +1,6 @@
 from datetime import datetime
 import enum
-from sqlalchemy import Float, ForeignKey, TypeDecorator, create_engine, Column, Integer, String, DateTime
+from sqlalchemy import Float, ForeignKey, TypeDecorator, create_engine, Integer, String, DateTime
 from sqlalchemy.orm import sessionmaker, Session, declarative_base, relationship, mapped_column, Mapped
 
 Base = declarative_base()
@@ -64,14 +64,14 @@ class Vehicle(Base):
     __tablename__ = "Vehicle"
     
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    make: Mapped[str] = Column(String)
-    model: Mapped[str] = Column(String)
-    year: Mapped[int] = Column(Integer)
-    vin: Mapped[str] = Column(String, unique=True)
-    purchase_price_c: Mapped[float] = Column(Float)
-    auction_fee_c: Mapped[float] = Column(Float)
-    status: Mapped[str] = Column(String)
-    purchase_date: Mapped[datetime] = Column(DateTime)
+    make: Mapped[str]
+    model: Mapped[str]
+    year: Mapped[int]
+    vin: Mapped[str] = mapped_column(unique=True)
+    purchase_price_c: Mapped[float]
+    auction_fee_c: Mapped[float]
+    status: Mapped[str]
+    purchase_date: Mapped[datetime]
 
 
 class Part(Base):
@@ -79,27 +79,27 @@ class Part(Base):
     
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     vehicle_id: Mapped[int] = mapped_column(ForeignKey("Vehicle.id"))
-    name: Mapped[str] = Column(String)
-    oem_number: Mapped[str] = Column(String)
-    condition_note: Mapped[str] = Column(String)
-    loc_locker: Mapped[str] = Column(String)
-    loc_bin: Mapped[str] = Column(String)
-    est_value_c: Mapped[float] = Column(Float)
-    status: Mapped[str] = Column(String)
+    name: Mapped[str]
+    oem_number: Mapped[str]
+    condition_note: Mapped[str]
+    loc_locker: Mapped[str]
+    loc_bin: Mapped[str]
+    est_value_c: Mapped[float]
+    status: Mapped[str]
 
 class Listing(Base):
     __tablename__ = "Listing"
     
-    id: Mapped[int] = Column(Integer, primary_key=True, index=True)
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True, index=True)
     part_id: Mapped[int] = mapped_column(ForeignKey("Part.id"))
-    platform: Mapped[ListingPlatform] = mapped_column("platform", DBStrEnum(ListingPlatform))
-    external_id: Mapped[str] = Column(String)
-    url: Mapped[str] = Column(String)
-    price_c: Mapped[float] = Column(Float)
-    fees_c: Mapped[float] = Column(Float)
-    status: Mapped[str] = Column(String)
-    listed_datetime: Mapped[datetime] = Column(DateTime)
-    sold_datetime: Mapped[datetime] = Column(DateTime, nullable=True)
+    platform: Mapped[ListingPlatform] = mapped_column(DBStrEnum(ListingPlatform))
+    external_id: Mapped[str]
+    url: Mapped[str]
+    price_c: Mapped[float]
+    fees_c: Mapped[float]
+    status: Mapped[str]
+    listed_datetime: Mapped[datetime]
+    sold_datetime: Mapped[datetime] = mapped_column(nullable=True)
 
 
 # Database helper
@@ -109,4 +109,3 @@ def get_db() -> Session:
         yield db
     finally:
         db.close()
-

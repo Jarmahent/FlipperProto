@@ -1,16 +1,9 @@
 from fastapi import FastAPI
 from api.vehicles import router as vehicles_router
+from api.parts import router as parts_router
 import uvicorn
+from api.metadata import metadata_tag_info
 
-
-class API_TAGS:
-    VEHICLES = "Vehicles"
-    PARTS = "Parts"
-    LISTINGS = "Listings"
-
-metadata_tag_info = [
-{"name": "Vehicles"}
-]
 
 
 def init_app():
@@ -27,6 +20,7 @@ def init_app():
 
 
     app.include_router(vehicles_router)
+    app.include_router(parts_router)
 
     return app
 

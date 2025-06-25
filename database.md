@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS Vehicle (
 /*--------------------------------------------------------------------
   parts
 --------------------------------------------------------------------*/
-CREATE TABLE IF NOT EXISTS Parts (
+CREATE TABLE IF NOT EXISTS Part (
     id               INTEGER PRIMARY KEY,
     vehicle_id       INTEGER NOT NULL,
     name             TEXT    NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS Parts (
 /*--------------------------------------------------------------------
   listings
 --------------------------------------------------------------------*/
-CREATE TABLE IF NOT EXISTS Listings (
+CREATE TABLE IF NOT EXISTS Listing (
     id           INTEGER PRIMARY KEY,
     part_id      INTEGER NOT NULL,
     platform     TEXT    NOT NULL CHECK (platform IN ('ebay', 'facebook', 'shopify', 'local')),
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS Listings (
     fees_c       NUMERIC(10, 2) NOT NULL DEFAULT 0,
     status       TEXT    NOT NULL CHECK (status IN ('draft', 'live', 'sold', 'ended')),
     listed_dt    TEXT    NOT NULL,
-    sold_dt      TEXT,
+    sold_date    TEXT,
     FOREIGN KEY (part_id) REFERENCES parts(id) ON DELETE CASCADE
 );
 

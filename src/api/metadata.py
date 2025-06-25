@@ -1,4 +1,7 @@
-class API_TAGS:
+from enum import Enum
+
+
+class API_TAGS(Enum):
     VEHICLES = "Vehicles"
     PARTS = "Parts"
     LISTINGS = "Listings"

@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS Vehicle (
   parts
 --------------------------------------------------------------------*/
 CREATE TABLE IF NOT EXISTS Part (
-    id               INTEGER PRIMARY KEY,
+    id               INTEGER PRIMARY KEY AUTOINCREMENT,
     vehicle_id       INTEGER NOT NULL,
     name             TEXT    NOT NULL,
     oem_number       TEXT,
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS Part (
     loc_locker       TEXT    NOT NULL,
     loc_bin          TEXT    NOT NULL,
     est_value_c      NUMERIC(10, 2) NOT NULL,
-    status           TEXT    NOT NULL CHECK (status IN ('in_bin', 'listed', 'sold', 'scrapped')),
+    status           TEXT    NOT NULL CHECK (status IN ('IN_BIN', 'LISTED', 'SOLD', 'SCRAPPED')),
     FOREIGN KEY (vehicle_id) REFERENCES vehicles(id) ON DELETE CASCADE
 );
 

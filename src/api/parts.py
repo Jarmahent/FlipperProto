@@ -15,6 +15,7 @@ class PartSchema(BaseModel):
     oem_number: str
     condition_note: str
     loc_locker: str
+    loc_bin: str
     est_value_c: float
     status: str
 
@@ -44,7 +45,9 @@ async def create_part(
 
 
 @router.get("/", summary="Fetch parts")
-async def get_parts() -> list[PartReadSchema]:
+async def get_parts(
+    vehicle_id: int
+) -> list[PartReadSchema]:
     """
     Fetch all parts in the system.
     
@@ -53,7 +56,7 @@ async def get_parts() -> list[PartReadSchema]:
     """
     session = get_db()
     for session in session:
-        stmt = select(Part)
+        stmt = select(Part).where(Part.vehicle_id == vehicle_id)
         parts = session.scalars(stmt).all()
 
         v_parts = [PartReadSchema.model_validate(part) for part in parts]

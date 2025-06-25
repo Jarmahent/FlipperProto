@@ -77,12 +77,13 @@ class Vehicle(Base):
 class Part(Base):
     __tablename__ = "Part"
     
-    id: Mapped[int] = Column(Integer, primary_key=True, index=True)
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     vehicle_id: Mapped[int] = mapped_column(ForeignKey("Vehicle.id"))
     name: Mapped[str] = Column(String)
     oem_number: Mapped[str] = Column(String)
     condition_note: Mapped[str] = Column(String)
     loc_locker: Mapped[str] = Column(String)
+    loc_bin: Mapped[str] = Column(String)
     est_value_c: Mapped[float] = Column(Float)
     status: Mapped[str] = Column(String)
 

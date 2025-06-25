@@ -9,21 +9,19 @@ class API_TAGS:
     LISTINGS = "Listings"
 
 metadata_tag_info = [
-    {
-        "Test": "Test",
-    }
+{"name": "Vehicles"}
 ]
 
 
 def init_app():
     app = FastAPI(
-        title="RTA API",
+        title="Flipper API",
         version="0.0.1",
         openapi_tags=metadata_tag_info,
         # lifespan=lifespan,
-        # openapi_url="/rta/openapi.json",
-        # docs_url="/rta/swagger",
-        # redoc_url="/rta/redoc",
+        openapi_url="/flipper/openapi.json",
+        docs_url="/flipper/swagger",
+        redoc_url="/flipper/redoc",
         swagger_ui_parameters={"syntaxHighlight": {"theme": "obsidian"}},
     )
 

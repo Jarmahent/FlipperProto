@@ -6,15 +6,15 @@ PRAGMA foreign_keys = ON;
   vehicles
 --------------------------------------------------------------------*/
 CREATE TABLE IF NOT EXISTS Vehicle (
-    id               INTEGER PRIMARY KEY,
+    id               INTEGER PRIMARY KEY AUTOINCREMENT,
     make             TEXT    NOT NULL,
     model            TEXT    NOT NULL,
     year             INTEGER NOT NULL,
     vin              TEXT    UNIQUE,
-    purchase_price_c NUMERIC(10, 2) NOT NULL,
-    auction_fee_c    NUMERIC(10, 2) NOT NULL DEFAULT 0,
-    status           TEXT    NOT NULL CHECK (status IN ('purchased', 'parted_out', 'closed_out')),
-    purchased_dt     TEXT    NOT NULL DEFAULT (datetime('now'))
+    purchase_price_c FLOAT   NOT NULL,
+    auction_fee_c    FLOAT   NOT NULL DEFAULT 0,
+    status           TEXT    NOT NULL CHECK (status IN ('PURCHASED', 'PARTED_OUT', 'CLOSED_OUT')),
+    purchase_date    TEXT    NOT NULL DEFAULT (datetime('now'))
 );
 
 /*--------------------------------------------------------------------

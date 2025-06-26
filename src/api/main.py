@@ -1,8 +1,10 @@
 from fastapi import FastAPI
 from api.vehicles import router as vehicles_router
 from api.parts import router as parts_router
+from api.listings import router as listings_router
 import uvicorn
 from api.metadata import metadata_tag_info
+from fastapi.middleware.cors import CORSMiddleware
 
 
 
@@ -21,6 +23,16 @@ def init_app():
 
     app.include_router(vehicles_router)
     app.include_router(parts_router)
+    app.include_router(listings_router)
+
+    # Enable CORS for all origins
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
     return app
 

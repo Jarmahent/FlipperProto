@@ -44,9 +44,9 @@ CREATE TABLE IF NOT EXISTS Listing (
   url          TEXT,
   price_c      NUMERIC(10, 2) NOT NULL,
   fees_c       NUMERIC(10, 2) NOT NULL DEFAULT 0,
-  status       TEXT    NOT NULL CHECK (status IN ('draft', 'live', 'sold', 'ended')),
-  listed_dt    TEXT    NOT NULL,
-  sold_date    TEXT,
+  status       TEXT    NOT NULL CHECK (status IN ('DRAFT', 'LIVE', 'SOLD', 'ENDED')),
+  listed_datetime    TEXT,
+  sold_datetime      TEXT,
   FOREIGN KEY (part_id) REFERENCES parts(id) ON DELETE CASCADE
 );
 

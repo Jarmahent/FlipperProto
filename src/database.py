@@ -1,5 +1,6 @@
 from datetime import datetime
 import enum
+from typing import Optional
 from sqlalchemy import Float, ForeignKey, TypeDecorator, create_engine, Integer, String, DateTime
 from sqlalchemy.orm import sessionmaker, Session, declarative_base, relationship, mapped_column, Mapped
 
@@ -53,10 +54,10 @@ class ListingStatus(enum.Enum):
 
 
 class ListingPlatform(enum.Enum):
-    EBAY = "eBay"
-    FACEBOOK = "Facebook Marketplace"
-    CRAIGSLIST = "Craigslist"
-    SHOPIFY = "Shopify"
+    EBAY = "EBAY"
+    FACEBOOK = "MARKETPLACE"
+    CRAIGSLIST = "CRAIGSLIST"
+    SHOPIFY = "SHOPIFY"
 
 
 # SQLAlchemy Model
@@ -79,6 +80,7 @@ class Part(Base):
     
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     vehicle_id: Mapped[int] = mapped_column(ForeignKey("Vehicle.id"))
+    vehicle = relationship(Vehicle, foreign_keys=[vehicle_id])
     name: Mapped[str]
     oem_number: Mapped[str]
     condition_note: Mapped[str]
@@ -92,6 +94,7 @@ class Listing(Base):
     
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True, index=True)
     part_id: Mapped[int] = mapped_column(ForeignKey("Part.id"))
+    part = relationship(Part, foreign_keys=[part_id])
     platform: Mapped[ListingPlatform] = mapped_column(DBStrEnum(ListingPlatform))
     external_id: Mapped[str]
     url: Mapped[str]
@@ -99,7 +102,7 @@ class Listing(Base):
     fees_c: Mapped[float]
     status: Mapped[str]
     listed_datetime: Mapped[datetime]
-    sold_datetime: Mapped[datetime] = mapped_column(nullable=True)
+    sold_datetime: Mapped[Optional[datetime]] = mapped_column(nullable=True)
 
 
 # Database helper

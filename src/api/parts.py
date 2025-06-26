@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Optional
 from fastapi import APIRouter
 from pydantic import BaseModel, ConfigDict
 from sqlalchemy import select
@@ -46,7 +47,7 @@ async def create_part(
 
 @router.get("/", summary="Fetch parts")
 async def get_parts(
-    vehicle_id: int
+    vehicle_id: Optional[int] = None
 ) -> list[PartReadSchema]:
     """
     Fetch all parts in the system.
@@ -56,7 +57,9 @@ async def get_parts(
     """
     session = get_db()
     for session in session:
-        stmt = select(Part).where(Part.vehicle_id == vehicle_id)
+        stmt = select(Part)
+        if vehicle_id is not None:
+            stmt = stmt.where(Part.vehicle_id == vehicle_id)
         parts = session.scalars(stmt).all()
 
         v_parts = [PartReadSchema.model_validate(part) for part in parts]

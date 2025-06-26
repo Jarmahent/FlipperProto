@@ -13,6 +13,9 @@ unit_test_output
 **/*.env
 launch.json
 
+# DB Files
+*.db
+
 # Cursor rules
 .cursor*
 
